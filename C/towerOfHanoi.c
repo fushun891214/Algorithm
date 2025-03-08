@@ -1,17 +1,18 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-void towerOfHanoi(int n,char source,char destiation,char auxiliary){
+void towerOfHanoi(int n,char source,char destination,char auxiliary){
     if(n == 1){
-        printf("Move disk 1 from source %c to destiation %c \n",source,destiation);
+        printf("Move disk 1 from source %c to destination %c \n",source,destination);
         return;
     }
-    towerOfHanoi(n-1,source,auxiliary,destiation);
-    printf("Move dick %d from source %c to destiation %c \n",n,source,destiation);
-    towerOfHanoi(n-1,auxiliary,destiation,source);
+    towerOfHanoi(n-1,source,auxiliary,destination);
+    printf("Move disk %d from source %c to destination %c \n",n,source,destination);
+    towerOfHanoi(n-1,auxiliary,destination,source);
 }
 
 int main(void){
     int n = 3;
-    towerOfHanoi(n,'A','B','C');
+    char a = 'A',b = 'B',c = 'C';
+    towerOfHanoi(n,a,b,c);
 }

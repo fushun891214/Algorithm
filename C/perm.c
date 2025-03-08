@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void swap(char *a,char *b){
     char temp = *a;
@@ -14,10 +14,11 @@ void perm(char *list,int i,int n){
             printf("%c",list[j]);
         }
         printf("\n");
+        return;
     }
     for(j = i;j <= n;j++){
         swap(&list[i],&list[j]);
-        perm(list,i+1,n);
+        perm(list,i + 1,n);
         swap(&list[i],&list[j]);
     }
 }

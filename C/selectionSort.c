@@ -7,16 +7,16 @@ void swap(int *a,int *b){
     *b = temp;
 }
 
-void selectionSort(int *arr,int n){
+void SelectionSort(int *arr,int n){
     int i,j,min;
-    for(i = 0;i < n-1;i++){
+    for(i = 0;i < (n-1);i++){
         min = i;
-        for(j = i+1;j < n;j++){
+        for(j = (i+1);j < n;j++){
             if(arr[j] < arr[min]){
                 min = j;
             }
         }
-        if(i != min){
+        if(min != i){
             swap(&arr[i],&arr[min]);
         }
     }
@@ -24,12 +24,8 @@ void selectionSort(int *arr,int n){
 
 int main(void){
     int n = 5;
-    int arr[5] = {4,5,3,2,1};
-    for(int i = 0;i < n;i++){
-        printf("%d ",arr[i]);
-    }
-    printf("\n");
-    selectionSort(arr,n);
+    int arr[5] = {9,3,2,6,5};
+    SelectionSort(arr,n);
     for(int i = 0;i < n;i++){
         printf("%d ",arr[i]);
     }
