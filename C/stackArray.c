@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define MAX_SIZE 5
 
-int item;
-
-typedef struct stack {
+typedef struct stack{
     int top;
     int *array;
 }IStack;
@@ -23,31 +20,30 @@ int push(IStack *stack,int item){
 int pop(IStack *stack){
     if(stack->top < 0){
         printf("Stack is empty \n");
-        return 0;
+        return -1;
     }
-    item = stack->array[stack->top];
+    int item = stack->array[stack->top];
     stack->top--;
-    return 1;
+    return item;
 }
 
 int main(void){
     IStack *stack = (IStack *)malloc(sizeof(IStack));
     stack->top = -1;
     stack->array = (int *)malloc(sizeof(int) * MAX_SIZE);
-    item = 10;
+    int item = 10;
 
     for(int i = 0;i < MAX_SIZE;i++){
         push(stack,item++);
-    }
-
-    for(int i = 0;i < 2;i++){
-        pop(stack);
     }
 
     for(int i = 0;i <= stack->top;i++){
         printf("%d \n",stack->array[i]);
     }
 
-    free(stack->array);
-    free(stack);
+    printf("\n");
+
+    for(int i = 0;i < MAX_SIZE;i++){
+        printf("%d \n",pop(stack));
+    }
 }
