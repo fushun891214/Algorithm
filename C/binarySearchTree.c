@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct BinarySearchTree{
     int data;
@@ -17,7 +17,7 @@ BST *newNode(int x){
 
 BST *insert(BST *t,int x){
     if(t == NULL){
-        return newNode(x);
+        t = newNode(x);
     }
     else if(t->data < x){
         t->rChild = insert(t->rChild,x);
@@ -28,15 +28,15 @@ BST *insert(BST *t,int x){
     return t;
 }
 
-BST *search(BST *t,int x){
+BST *searchRecursive(BST *t,int x){
     if(t == NULL){
         return NULL;
     }
     else if(t->data < x){
-        return search(t->rChild,x);
+        return searchRecursive(t->rChild,x);
     }
     else if(t->data > x){
-        return search(t->lChild,x);
+        return searchRecursive(t->lChild,x);
     }
     return t;
 }
@@ -61,12 +61,14 @@ void freeTree(BST *t){
 
 int main(void){
     BST *t = NULL;
-    t = insert(t,5);
-    t = insert(t,3);
-    t = insert(t,8);
+    t = insert(t,13);
+    t = insert(t,11);
+    t = insert(t,19);
+    t = insert(t,1);
+    t = insert(t,2);
     inorderTraversal(t);
-    if(search(t,8) != NULL){
-        printf("%s","Turn up");
+    if(searchRecursive(t,19) != NULL){
+        printf("%s","Have found");
     }
     freeTree(t);
 }
