@@ -3,6 +3,7 @@
 
 typedef struct BinarySearchTree{
     int data;
+    int leftsize;
     struct BinarySearchTree *lChild;
     struct BinarySearchTree *rChild;
 }BST;
@@ -10,6 +11,7 @@ typedef struct BinarySearchTree{
 BST *newNode(int x){
     BST *t = (BST *)malloc(sizeof(BST));
     t->data = x;
+    t->leftsize = 1;
     t->lChild = NULL;
     t->rChild = NULL;
     return t;
@@ -23,6 +25,7 @@ BST *insert(BST *t,int x){
         t->rChild = insert(t->rChild,x);
     }
     else if(t->data > x){
+        t->leftsize += 1;
         t->lChild = insert(t->lChild,x);
     }
     return t;
@@ -60,12 +63,32 @@ BST *searchIterative(BST *t,int x){
     return t;
 }
 
+BST *searchK(BST *t,int k){
+    int found = 0;
+    while(t != NULL && !found){
+        if(t->leftsize == k){
+            found = 1;
+        }
+        else if(t->leftsize > k){
+            t = t->lChild;
+        }
+        else{
+            k -= t->leftsize;
+            t = t->rChild;
+        }
+    }
+    if(!found){
+        return NULL;
+    }
+    return t;
+}
+
 void inorderTraversal(BST *t){
     if(t == NULL){
         return;
     }
     inorderTraversal(t->lChild);
-    printf("%d ",t->data);
+    printf("t of data:%d t of leftsize:%d \n",t->data,t->leftsize);
     inorderTraversal(t->rChild);
 }
 
@@ -87,10 +110,13 @@ int main(void){
     t = insert(t,2);
     inorderTraversal(t);
     if(searchRecursive(t,10) != NULL){
-        printf("%s","Have found ");
+        printf("%s","Have found \n");
     }
     if(searchIterative(t,19) != NULL){
-        printf("%s","Have found ");
+        printf("%s","Have found \n");
+    }
+    if(searchK(t,3) != NULL){
+        printf("kth-smallest:%d \n",searchK(t,2)->data);
     }
     freeTree(t);
 }
