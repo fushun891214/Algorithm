@@ -41,6 +41,25 @@ BST *searchRecursive(BST *t,int x){
     return t;
 }
 
+BST *searchIterative(BST *t,int x){
+    int found = 0;
+    while(t != NULL && !found){
+        if(x < t->data){
+            t = t->lChild;
+        }
+        else if(x > t->data){
+            t = t->rChild;
+        }
+        else if(t->data == x){
+            found = 1;
+        }
+    }
+    if(!found){
+        return NULL;
+    }
+    return t;
+}
+
 void inorderTraversal(BST *t){
     if(t == NULL){
         return;
@@ -67,8 +86,11 @@ int main(void){
     t = insert(t,1);
     t = insert(t,2);
     inorderTraversal(t);
-    if(searchRecursive(t,19) != NULL){
-        printf("%s","Have found");
+    if(searchRecursive(t,10) != NULL){
+        printf("%s","Have found ");
+    }
+    if(searchIterative(t,19) != NULL){
+        printf("%s","Have found ");
     }
     freeTree(t);
 }
